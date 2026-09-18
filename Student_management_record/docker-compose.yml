@@ -1,0 +1,61 @@
+services:
+
+  db:
+    image: postgres:16
+    container_name: myapp-db
+
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: "vishnuvardhan@536"
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d myapp"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+
+    container_name: myapp-backend
+
+    environment:
+      POSTGRES_DB: myapp
+      POSTGRES_HOST: db
+      POSTGRES_PASSWORD: "vishnuvardhan@536"
+      POSTGRES_PORT: "5432"
+      POSTGRES_USER: postgres
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+
+    container_name: myapp-frontend
+
+    depends_on:
+      backend:
+        condition: service_started
+
+    ports:
+      - "8501:8501"
+
+
+volumes:
+  postgres_data:

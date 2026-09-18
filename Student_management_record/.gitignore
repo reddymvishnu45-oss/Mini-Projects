@@ -89,3 +89,19 @@ Thumbs.db
 *.temp
 *.swp
 *.swo
+
+# =========================
+
+# Docker / PostgreSQL
+
+# =========================
+
+postgres_data/
+pgdata/
+docker-compose.override.yml
+
+# Docker local environment
+
+.env
+.env.*
+!.env.example

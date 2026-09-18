@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from .model import Record
-from .schemas import RecordCreated
+from model import Record
+from schemas import RecordCreated
 
 def create(db : Session ,data: RecordCreated):
     obj =  Record(name = data.name,email=data.email,age = data.age,department = data.department)

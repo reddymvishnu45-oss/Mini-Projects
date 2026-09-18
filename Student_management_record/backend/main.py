@@ -1,8 +1,8 @@
 from fastapi import FastAPI,Depends,HTTPException
 from sqlalchemy.orm import Session
-from .database import Base,engine,get_db
-from .schemas import RecordCreated,RecordOut
-from . import crud
+from database import Base, engine, get_db
+from schemas import RecordCreated,RecordOut
+import crud
 
 Base.metadata.create_all(bind=engine)
 
