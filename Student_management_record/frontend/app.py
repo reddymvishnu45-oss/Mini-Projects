@@ -4,7 +4,8 @@ import pandas as pd
 
 st.set_page_config(page_title='Student Record Manager',page_icon='📌')
 st.title("📌 Student Record Manager")
-API = "https://student-management-backend-latest-9g0w.onrender.com/"
+API = "https://student-management-backend-latest-9g0w.onrender.com"
+print(API)
 
 # =========================
 # ADD / UPDATE
